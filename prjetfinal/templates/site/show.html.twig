@@ -1,0 +1,27 @@
+{% extends'base.html.twig' %}
+
+{% block body %}
+    <h2>{{ jeu.title }}</h2>
+
+    <div class="metadata">ecrit le {{ jeu.createdAt | date ('d/m/Y')  }} à {{ jeu.createdAt | date ('H:i') }} dans le theme {{ jeu.category.title }}</div>
+    <div class="content"></div>
+    <hr>
+    <img src="{{ jeu.image }}" alt="">
+    {{ jeu.description | raw }}
+    <hr style="background: #ee2d4d">
+    <section id="commentaires">
+     {%  for comment in jeu.comments %}
+        <div class="comment">
+            <div class="row">
+                <div class="col-3">
+                    {{ comment.auteur }}(<small> {{ comment.createdAt| date('d/m/Y à H:i') }}</small>)
+                </div>
+                <div class="col">
+                   {{ comment.content| raw }}
+                </div>
+            </div>
+        </div>
+     {% endfor %}
+
+    </section>
+{% endblock %}

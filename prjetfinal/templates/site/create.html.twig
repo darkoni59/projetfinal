@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formjeux 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+
+
+    <h1>Création d'une partie</h1>
+
+    <hr style="background: #ee2d4d">
+
+    {{ form_start(formjeux) }}
+
+    {{ form_row(formjeux.title,{'attr':{'placeholder':'Titre de votre jeux '}})}}
+    {{ form_row(formjeux.category) }}
+    {{ form_row(formjeux.description,{'attr':{'placeholder':'description de votre jeux'}})}}
+    {{ form_row(formjeux.image,{'attr':{'placeholder':"url de l'image du jeux"}})}}
+    {{ form_rest(formjeux) }}
+
+    <hr style="background: #ee2d4d">
+
+    <button type="submit"  class="btn btn-secondary">
+    {% if editMode %}
+        changer
+        {% else %}
+        création de la partie
+    </button>
+    {{ form_end(formjeux) }}
+{% endif %}
+
+
+{% endblock %}
