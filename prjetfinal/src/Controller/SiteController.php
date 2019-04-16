@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Jeux;
+use App\Form\CommentType;
 use App\Form\JeuxType;
 use App\Repository\JeuxRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -67,8 +69,23 @@ class SiteController extends AbstractController
     /**
      * @Route("/site/{id}", name="site_show")
      */
-    public function show(Jeux $jeux){
-        return$this->render('site/show.html.twig',['jeu'=>$jeux]);
+    public function show(Jeux $jeux, Request $request,ObjectManager $manager){
+        $comment= new Comment();
+
+        $form= $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid()){
+
+            $comment->setCreatedAt(new \DateTime())
+                    ->setJeux($jeux);
+            $manager->persist($comment);
+            $manager->flush();
+            return $this->redirectToRoute('site_show',['id'=>$jeux->getId()]);
+        }
+
+        return$this->render('site/show.html.twig',['jeu'=>$jeux, 'commentForm'=> $form->createView() ]);
 
 
     }

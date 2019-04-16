@@ -12,31 +12,35 @@
 
 
 
-    <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('site') }}">accueil </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Profil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Connexion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="site/enregistrement">Inscription</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">carte des parties</a>
+                <a class="nav-link" href="{{path('security_profil')  }}">Profil</a>
             </li>
             <li class="nav-item">
                 <a href="{{ path('site_create') }}" class="nav-link">creation de partie</a>
             </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">carte des parties</a>
+            </li>
+            {% if not app.user  %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+        </li>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="{{ path('security_logout') }}"class="nav-link">deconnexion</a>
+            </li>
+            {% endif %}
         </ul>
 
-    </div>
 </nav>
-
 </nav>
 <div class="container">
     {% block body %}{% endblock %}
