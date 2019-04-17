@@ -4,6 +4,12 @@
     <h1> profil utilisateur</h1>
 
 
+        <p>email:  {{ app.user.email }}</p>
+    <hr style="background-color: #ffa500">
+        <p>pseudo: {{ app.user.username }}</p>
+
+
+    <a href="{{ path('security_logout') }}"class="btn btn-warning">deconnexion</a>
 
 
 {% endblock %}

@@ -89,5 +89,20 @@ class SiteController extends AbstractController
 
 
     }
+    /**
+     * @Route("/carte",name="site_carte")
+     */
+    public function carteG(){
+
+        return $this->render('site/carte.html.twig');
+
+    }
+/**
+ * @Route("/email",name="mailer_email")
+ */
+
+public function reset(){
+    return $this->render('mailer/request.html.twig');
+}
 
 }
