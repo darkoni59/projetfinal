@@ -4,6 +4,8 @@
     <h2>{{ jeu.title }}</h2>
 
     <div class="metadata">ecrit le {{ jeu.createdAt | date ('d/m/Y')  }}  à {{ jeu.createdAt | date ('H:i') }} dans le theme {{ jeu.category.title }}</div>
+    <p>lieu de l'évenement:  {{ jeu.ville }}</p>
+        <p>le {{ jeu.createdAt }}</p>
     <div class="content"></div>
     <hr>
     <img src="{{ jeu.image }}" alt="">

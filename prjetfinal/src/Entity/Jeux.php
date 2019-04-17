@@ -51,6 +51,11 @@ class Jeux
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -148,6 +153,18 @@ class Jeux
                 $comment->setJeux(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }
