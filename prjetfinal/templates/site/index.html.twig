@@ -15,7 +15,7 @@
            </div>
             <div class="back">
                 <div class="back-content middle ">
-                {{ jeu.description | raw }}
+                    <p>{{jeu.category.description }}</p>
                 <a href="{{path('site_show',{"id":jeu.id})}}"class="btn  btn-warning">voir la suite</a>
                 </div>
             </div>

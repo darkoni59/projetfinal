@@ -52,7 +52,6 @@ class SiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&&$form->isValid()){
-            $jeux->setCreatedAt(new\DateTime());
             $manager->persist($jeux);
             $manager->flush();
 
