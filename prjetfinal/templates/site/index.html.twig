@@ -6,27 +6,21 @@
 
     {% for jeu in jeux %}
 
+        <div class="container mt-4">
 
-        <div class="card middle">
-            <div class="front">
+          <div class="row">
+          <div class="col-md-4">
+            <div class="card">
                 <h2>{{ jeu.title }}</h2>
                 <img src="{{ jeu.image }}" alt="">
-                <div class="metadata">poster le {{ jeu.createdAt | date ('d/m/Y')  }} à {{ jeu.createdAt | date('H:i') }}  {{ jeu.category.title}} </div>
-           </div>
-            <div class="back">
-                <div class="back-content middle ">
+                <div class="metadata">partie prévu pour  {{ jeu.createdAt | date ('d/m/Y')  }} à {{ jeu.createdAt | date('H:i') }}  {{ jeu.category.title}} </div>
+
+
                     <p>{{jeu.category.description }}</p>
                 <a href="{{path('site_show',{"id":jeu.id})}}"class="btn  btn-warning">voir la suite</a>
-                </div>
             </div>
+          </div>
+          </div>
         </div>
-        <div class="content">
-
-
-
-
-        </div>
-
-        <hr style="background-color: #ffa500">
     {% endfor %}
 {% endblock %}
