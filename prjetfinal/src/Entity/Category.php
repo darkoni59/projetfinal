@@ -29,7 +29,7 @@ class Category
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\jeux", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Jeux", mappedBy="category")
      */
     private $jeux;
 

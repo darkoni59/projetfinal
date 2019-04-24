@@ -51,8 +51,7 @@ public function login(){
  */
 public function logout(){
 
-    return $this->redirectToRoute("site/home");
-    return $this->render('site/home');
+    return $this->redirectToRoute("/");
 }
 /**
  * @Route("/profil",name="security_profil")

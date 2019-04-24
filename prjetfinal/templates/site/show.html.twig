@@ -4,35 +4,54 @@
     <h2>{{ jeu.title }}</h2>
 
     <div class="metadata">partie prévu pour le  {{ jeu.createdAt | date ('d/m/Y')  }}  à {{ jeu.createdAt | date ('H:i') }} dans le theme {{ jeu.category.title }}</div>
+
     <p>lieu de l'évenement:  {{ jeu.ville }}</p>
 
-    <div class="content"></div>
-    <hr>
-    <img src="{{ jeu.image }}" alt="">
-    {{ jeu.description | raw }}
+    <div class="content">    {{ jeu.description | raw }}
+        <img src="{{ jeu.image }}" alt="">
+    </div>
 
-    <section id="commentaires">
+    <hr style="background: #ffa500">
+
+
+
+    {% if is_granted('ROLE_ADMIN')  %}
+        <a href="{{path('site_delete',{'id':jeu.id})}}" class="btn btn-primary">supprimer un Jeu</a>
+        <a href="{{ path('site_edit',{'id':jeu.id}) }}" class="btn btn-primary ">editer</a>
+        </div>
+    {% endif %}
+    <article id="commentaires">
         <h1>{{ jeu.comments| length }} Commentaires:</h1>
         <hr style="background: #ee2d4d">
         {%  for comment in jeu.comments %}
         <div class="comment">
             <div class="row">
                 <div class="col-3">
-                    {{ comment.auteur }}(<small> {{ comment.createdAt| date('d/m/Y à H:i') }}</small>)
+                  {{comment.user }}
+                    (<small> {{ comment.createdAt| date('d/m/Y à H:i') }}</small>)
 
                 </div>
                 <div class="col">
                    {{ comment.content| raw }}
+                    {% dump(comment.content) %}
                 </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                {{ include('site/commdelete.html.twig') }}
+                {% endif %}
             </div>
         </div>
          <hr style="background-color: #ee2d4d">
      {% endfor %}
-
+        {% if app.user %}
         {{ form_start(commentForm) }}
-        {{ form_row(commentForm.auteur,{'attr':{'placeholder':"votre pseudo"}})}}
         {{ form_row(commentForm.content,{'attr':{'placeholder':"votre commentaire"}}) }}
         <button type="submit" class="btn btn-warning">envoyer</button>
         {{ form_end(commentForm) }}
-    </section>
+        {% else %}
+        <h2>connecte toi </h2>
+        <a href="{{ path('security_login') }}" class="btn btn-warning">connexion</a>
+        {% endif %}
+    </article>
+
+
 {% endblock %}

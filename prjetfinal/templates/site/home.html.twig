@@ -4,13 +4,17 @@
 
 {% endblock %}
 {% block body %}
-    <h1>{{ title }} </h1>
-    <hr style="background: #ee2d4d">
+    {% if not app.user  %}
+
+    <h1>bonjour belle inconnu</h1>
+        <hr style="background: #ee2d4d">
 <p>ce site vous permet de crée des partie de vos jeux de plateaux préferé comme le monopoli , Dixit est bien d'autres </p>
+{% else %}
+    <h1>{{ title }}{{ app.user.username }} </h1>
+    <hr style="background: #ee2d4d">
+    <p>ce site vous permet de crée des partie de vos jeux de plateaux préferé comme le monopoli , Dixit est bien d'autres </p>
 
-
-
-
+{% endif %}
 
 
 {% endblock %}

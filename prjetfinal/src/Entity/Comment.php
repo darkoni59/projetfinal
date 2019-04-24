@@ -17,11 +17,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $auteur;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $content;
@@ -32,27 +27,23 @@ class Comment
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\jeux", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Jeux", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $jeux;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     */
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
 
-    public function setAuteur(string $auteur): self
-    {
-        $this->auteur = $auteur;
 
-        return $this;
-    }
 
     public function getContent(): ?string
     {
@@ -86,6 +77,18 @@ class Comment
     public function setJeux(?jeux $jeux): self
     {
         $this->jeux = $jeux;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% form_theme formJeux 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN')  %}
+    {{ form_start(formJeux) }}
+    {{ form_row(formJeux.title,{'attr':{'placeholder':"titre de l'article"}})}}
+    {{ form_row(formJeux.description,{'attr':{'placeholder':"contenu de l'article"}}) }}
+    {{ form_row(formJeux.image,{'attr':{'placeholder':"url de l'image"}}) }}
+    <button type="submit" class="btn btn-success">
+
+        Supprimer
+
+    </button>
+    {{ form_end(formJeux) }}
+    {% endif %}
+
+{% endblock %}
