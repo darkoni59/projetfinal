@@ -9,8 +9,8 @@
         <div class="container mt-4">
 
           <div class="row">
-          <div class="col-md-4">
-            <div class="card">
+          <div class="col-md-5">
+            <div class="card ">
                 <h2>{{ jeu.title }}</h2>
                 <img src="{{ jeu.image }}" alt="">
                 <div class="metadata">partie prévu pour  {{ jeu.createdAt | date ('d/m/Y')  }} à {{ jeu.createdAt | date('H:i') }}  {{ jeu.category.title}} </div>

@@ -51,7 +51,8 @@ public function login(){
  */
 public function logout(){
 
-    return $this->redirectToRoute("/");
+    return $this->render('site/home.html.twig');
+    return $this->redirectToRoute("site_home");
 }
 /**
  * @Route("/profil",name="security_profil")

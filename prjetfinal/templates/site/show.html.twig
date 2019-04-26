@@ -2,16 +2,32 @@
 
 {% block body %}
     <h2>{{ jeu.title }}</h2>
+    <div class="metadata">partie prévu pour le  {{ jeu.createdAt | date ('d/m/Y')  }}  à {{ jeu.createdAt | date ('H:i') }} dans le theme {{ jeu.category.title }}
+        </div>
 
-    <div class="metadata">partie prévu pour le  {{ jeu.createdAt | date ('d/m/Y')  }}  à {{ jeu.createdAt | date ('H:i') }} dans le theme {{ jeu.category.title }}</div>
 
     <p>lieu de l'évenement:  {{ jeu.ville }}</p>
+    <p>crée par: {{jeu.user.username  }}</p>
+    {{ jeu.description | raw }}
+    <div class="content">
+        <img src="{{ jeu.image }}" alt=""> <br><br><a href="{{ path('jeux_like',{'id':jeu.id}) }}" class="btn btn-primary js-like">
+            {% if app.user and jeu.isLikeByUser(app.user) %}
+                <i class="fab fa-wizards-of-the-coast"></i>
 
-    <div class="content">    {{ jeu.description | raw }}
-        <img src="{{ jeu.image }}" alt="">
+
+            {% else %}
+                <i class="far fa-thumbs-up"></i>
+            {% endif %}
+            <span class="js-likes">{{ jeu.likes| length }}</span>
+            <span class="js-label">J'aime</span>
+        </a>
+
     </div>
 
-    <hr style="background: #ffa500">
+
+
+
+    <hr>
 
 
 
@@ -22,7 +38,7 @@
     {% endif %}
     <article id="commentaires">
         <h1>{{ jeu.comments| length }} Commentaires:</h1>
-        <hr style="background: #ee2d4d">
+        <hr>
         {%  for comment in jeu.comments %}
         <div class="comment">
             <div class="row">
@@ -40,18 +56,49 @@
                 {% endif %}
             </div>
         </div>
-         <hr style="background-color: #ee2d4d">
+         <hr>
      {% endfor %}
         {% if app.user %}
         {{ form_start(commentForm) }}
-        {{ form_row(commentForm.content,{'attr':{'placeholder':"votre commentaire"}}) }}
-        <button type="submit" class="btn btn-warning">envoyer</button>
+        {{ form_row(commentForm.content,{"label":"commentaire",'attr':{'placeholder':"votre commentaire"}}) }}
+        <button type="submit" class="btn btn-danger">envoyer</button>
         {{ form_end(commentForm) }}
         {% else %}
         <h2>connecte toi </h2>
-        <a href="{{ path('security_login') }}" class="btn btn-warning">connexion</a>
+        <a href="{{ path('security_login') }}" class="btn btn-danger">connexion</a>
         {% endif %}
     </article>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function onClickBtnLike(event){
+            event.preventDefault();
+
+            const url= this.href;
+            const spanCount = this.querySelector('span.js-likes');
+            const icone=this.querySelector('i');
+
+
+            axios.get(url).then(function (response) {
+            spanCount.textContent= response.data.likes;
+            if (icone.classList.contains('fas')) {
+                icone.classList.replace('fas', 'far');
+            }else {
+                icone.classList.replace('far', 'fas');
+            }
+            });
+                }
+
+     document.querySelectorAll('a.js-like').forEach(function (link) {
+         link.addEventListener('click',onClickBtnLike);
+     })
+
+    </script>
+
 
 
 {% endblock %}

@@ -4,38 +4,67 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
-    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    {% block stylesheets %}
+        <style>
+
+        a,li,ul,p,h1,h2{
+            font-family: "Amiri Quran" ;
+            font-style: oblique;
+
+            }
+            body{
+
+                background-color: #1b6d85;
+            }
+            hr{
+                background-color: #000000;
+
+
+
+            }
+    </style>
+    {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ path('home') }}">Flip-Table</a>
+    <a class="navbar-brand" href="{{ path('home') }}">Flip-Table<i class="fas fa-dragon"></i></a>
 
 
 
         <ul class="navbar-nav mr-auto">
 
             {% if not app.user  %}
+            <li class="nav-item " >
+                <a class="nav-link" href="{{ path('security_login') }}">Connexion <i class="fas fa-power-off"></i>
+
+                </a>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
-            <li class="nav-item">
-            <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+            <a class="nav-link" href="{{ path('security_registration') }}">Inscription <i class="fas fa-scroll"></i></a>
         </li>
             </li>
             {% else %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('security_profil')  }}">    {{ app.user.username }}</a>
+                    <a class="nav-link" href="{{path('security_profil')  }}"> profil <i class="far fa-address-card"></i></a>
                 </li>
 
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ path('site') }}">liste des parties </a>
+                    <a class="nav-link" href="{{ path('site') }}">liste des parties <i class="fas fa-dice"></i></a>
+
+                <li class="nav-item ">
+                <a class="nav-link" href="{{ path('site_create') }}" >creation de partie <i class="fas fa-columns"></i></a>
+                </li>
+                <li class="nav-item ">
+                </li>
                 </li>
 
                 <li class="nav-item ">
-                <a href="{{ path('security_logout') }}"class="nav-link">deconnexion</a>
-            </li>
-
+                    <a class="nav-link" href="{{ path('security_logout') }}">deconnexion <i class="fas fa-power-off"></i></a>
+                </li>
             {% endif %}
         </ul>
 

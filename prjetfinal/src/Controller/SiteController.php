@@ -4,14 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Jeux;
+use App\Entity\PostLike;
 use App\Form\CommentType;
 use App\Form\JeuxType;
 use App\Repository\JeuxRepository;
+use App\Repository\PostLikeRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
 
 class SiteController extends AbstractController
 {
@@ -47,9 +50,8 @@ class SiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&&$form->isValid()){
-
-            $manager->persist($jeux)
-                ->setUser($this->getUser());
+                $jeux->setUser($this->getUser());
+            $manager->persist($jeux);
             $manager->flush();
 
             return $this->redirectToRoute('site_show',['id'=>$jeux->getId()]);
@@ -132,6 +134,36 @@ class SiteController extends AbstractController
         return $this->render('admin/index.html.twig', ['controller_name' => 'AdminController',]);
     }
 
+    /**
+     * @Route("/site/{id}/like",name="jeux_like")
+     * @param Jeux $jeux
+     * @param ObjectManager $manager
+     * @param PostLikeRepository $likeRepository
+     * @return Response
+     */
+    public function like(Jeux $jeux,ObjectManager $manager,PostLikeRepository $likeRepository ):Response{
+    $user=$this->getUser();
+    if (!$user)return $this->json(['code'=>403,'message tu doit te co '],403);
+    if ($jeux->isLikeByUser($user)){
+        $like=$likeRepository->findOneBy(['post'=>$jeux,'user'=>$user]);
+        $manager->remove($like);
+        $manager->flush();
+
+        return $this->json(['code'=>200,
+            'message'=>'like bien supprimé',
+                  'likes'=>$likeRepository->count(['post'=>$jeux])],200);
+    }
+    $like=new PostLike();
+    $like->setPost($jeux)
+        ->setUser($user);
+    $manager->persist($like);
+    $manager->flush();
+
+    return$this->json(['code'=>200,'message'=>'like bien ajouté','likes'=>$likeRepository->count(['post'=>$jeux])],200);
+
+
+    }
+
 
 
 
@@ -145,6 +177,7 @@ class SiteController extends AbstractController
 
 
     }
+
 
 
 }
