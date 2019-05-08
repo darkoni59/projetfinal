@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+
+        <div class="card ">
+
+
+    {% for user in users %}
+
+       pseudo:  {{ user.username }}
+        <br>
+        {% if user.role== 'ROLE_ADMIN'  %}
+          role:administrateur <i class="fas fa-ad"></i>
+
+    {% else %}
+
+       role: utilisateur
+
+        {% endif %}
+        <a href="{{ path('suppuser',{'id':user.id}) }}">supprimer</a>
+
+                 
+        <hr>
+    {% endfor %}
+
+
+{% endblock %}

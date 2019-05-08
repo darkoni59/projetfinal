@@ -55,17 +55,17 @@ class User implements UserInterface
     private $role;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Jeux", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Jeux", mappedBy="user",cascade={"remove"})
      */
     private $jeux;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PostLike", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\PostLike", mappedBy="user",cascade={"remove"})
      */
     private $likes;
 

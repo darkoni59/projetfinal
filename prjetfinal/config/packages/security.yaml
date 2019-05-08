@@ -25,7 +25,7 @@ security:
 
             logout:
                 path: security_logout
-                target: site
+                target: home
             # activate different ways to authenticate
 
             # http_basic: true

@@ -3,6 +3,7 @@
 {% block body %}
 
    <h1>connexion!</h1>
+    <br>
     <form action="{{ path('security_login') }}" method="post">
           <div class="form-group">
              <input placeholder="adresse email" required name="_username" type="text" class="form-control">
@@ -15,7 +16,6 @@
              </div>
           </div>
 
-        <a href="{{ path('mailer_email') }}"> mot de passe oublier</a>
     </form>
 
 {% endblock %}

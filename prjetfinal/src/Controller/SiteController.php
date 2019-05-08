@@ -7,8 +7,10 @@ use App\Entity\Jeux;
 use App\Entity\PostLike;
 use App\Form\CommentType;
 use App\Form\JeuxType;
+use App\Repository\CommentRepository;
 use App\Repository\JeuxRepository;
 use App\Repository\PostLikeRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +40,7 @@ class SiteController extends AbstractController
     }
     /**
      * @Route("/site/create",name="site_create")
-     * @Route("admin/{id}/edit",name="site_edit")
+     * @Route("/site/{id}/edit",name="site_edit")
      */
     public function form(Jeux $jeux=null,Request $request,ObjectManager $manager ){
 
@@ -101,10 +103,10 @@ class SiteController extends AbstractController
     /**
      * @Route("/site/{id}/delete",name="site_delete")
      */
-    //fonction de suppression d'article
+    //fonction de suppression de jeu
     public function delete(Jeux $jeux = null, Request $request, ObjectManager $manager)
     {
-
+        $postLike=new PostLike();
         $form = $this->createFormBuilder($jeux)
             ->add('title')
             ->add('description')
@@ -163,11 +165,6 @@ class SiteController extends AbstractController
 
 
     }
-
-
-
-
-
     /**
      * @Route("/email",name="mailer_email")
      */
@@ -177,8 +174,49 @@ class SiteController extends AbstractController
 
 
     }
+    /**
+     * @Route("/liste",name="site_liste")
+     */
+    public function liste(UserRepository $userRepository){
+            $user=$userRepository->findAll();
 
 
+    return $this->render('site/liste.html.twig',["users"=>$user]);
+    }
+
+/**
+ * @Route("/admin/suppuser/{id}",name="suppuser")
+ */
+public function suppuser(ObjectManager $manager,$id,UserRepository $userRepository ){
+    $user=$userRepository->find($id);
+    $manager->remove($user);
+    $manager->flush();
+
+
+    return $this->redirectToRoute('site_liste',["id"=>$user->getId()]);
+}
+/**
+ * @Route("/user/suppcomm/{id}",name="suppcomm")
+ */
+public function suppcommuser(Comment $comment, ObjectManager $manager ){
+
+    $com_id = $comment->getId();
+    $manager->remove($comment);
+    $manager->flush();
+    return $this->redirectToRoute('site',["id"=>$com_id]);
+}
+
+    /**
+     * @Route("/site/{id}/delete",name="site_delete")
+     */
+
+public function suppjeuxuser(Jeux $jeux,ObjectManager $manager){
+
+    $jeux_id=$jeux->getId();
+    $manager->remove($jeux);
+    $manager->flush();
+    return $this->redirectToRoute('site',["id"=>$jeux_id]);
+}
 
 }
 
