@@ -20,10 +20,8 @@ class JeuxType extends AbstractType
             ->add('description')
             ->add('image')
             ->add('createdAt')
-
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

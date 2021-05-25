@@ -13,10 +13,8 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content')
-         
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
