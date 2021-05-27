@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="662e3bab-35a5-43e6-986a-326c235ea014" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prjetfinal/DoctrineMigrations/Version20210430101154.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prjetfinal/bin/composer.phar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prjetfinal/composer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prjetfinal/composer-setup.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/projetfinal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projetfinal.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prjetfinal/.env" beforeDir="false" afterPath="$PROJECT_DIR$/prjetfinal/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prjetfinal/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/prjetfinal/composer.lock" afterDir="false" />
@@ -197,8 +199,23 @@
       <workItem from="1619772494321" duration="8480000" />
       <workItem from="1620028657898" duration="8000" />
       <workItem from="1621549818465" duration="1685000" />
-      <workItem from="1621770587615" duration="4054000" />
+      <workItem from="1621770587615" duration="10135000" />
     </task>
+    <task id="LOCAL-00001" summary="branche mentions">
+      <created>1621928147493</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621928147493</updated>
+    </task>
+    <task id="LOCAL-00002" summary="branche mentions">
+      <created>1621928328998</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621928328998</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,5 +233,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="branche mentions" />
+    <option name="LAST_COMMIT_MESSAGE" value="branche mentions" />
   </component>
 </project>

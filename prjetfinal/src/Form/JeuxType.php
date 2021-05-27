@@ -16,12 +16,12 @@ class JeuxType extends AbstractType
         $builder
             ->add('title')
             ->add('ville')
-            ->add('category',EntityType::class,['class'=>Category::class,'choice_label'=>'title'])
+            ->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'title'])
             ->add('description')
             ->add('image')
-            ->add('createdAt')
-        ;
+            ->add('createdAt');
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -19,36 +19,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
+     * @Assert\EqualTo(propertyPath="password",message="votre mot de passe doit etre identique ")
+     */
+
+    public $confirm_password;
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
      */
     private $email;
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\EqualTo(propertyPath="Username",message="pseudo déjà utilisé ")
      */
     private $username;
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8",minMessage="Votre mot de passe doit faire minimum 8 caracteres")
      */
     private $password;
-
-    /**
-     * @Assert\EqualTo(propertyPath="password",message="votre mot de passe doit etre identique ")
-     */
-
-    public $confirm_password;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -93,18 +88,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -116,16 +99,21 @@ class User implements UserInterface
 
         return $this;
     }
+
     public function eraseCredentials()
-    {}
+    {
+    }
+
     public function getSalt()
-    {}
+    {
+    }
+
     public function getRoles()
     {
-        if ($this->role=='ROLE_USER'){
-        return ['ROLE_USER'];}
-        elseif ($this->role=='ROLE_ADMIN'){
-            return['ROLE_ADMIN'];
+        if ($this->role == 'ROLE_USER') {
+            return ['ROLE_USER'];
+        } elseif ($this->role == 'ROLE_ADMIN') {
+            return ['ROLE_ADMIN'];
         }
     }
 
@@ -171,9 +159,22 @@ class User implements UserInterface
 
         return $this;
     }
+
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**

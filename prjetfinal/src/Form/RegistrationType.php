@@ -15,10 +15,10 @@ class RegistrationType extends AbstractType
         $builder
             ->add('email')
             ->add('username')
-            ->add('password',PasswordType::class)
-            ->add('confirm_password',PasswordType::class)
-        ;
+            ->add('password', PasswordType::class)
+            ->add('confirm_password', PasswordType::class);
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

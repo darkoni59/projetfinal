@@ -15,52 +15,58 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SecurityController extends AbstractController
 {
-  /**
-   * @Route("registration",name="security_registration")
-   */
-public function registration(Request $request,ObjectManager $manager,UserPasswordEncoderInterface $encoder){
-    $user=new User();
+    /**
+     * @Route("registration",name="security_registration")
+     */
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    {
+        $user = new User();
 
-    $form=$this->createForm(RegistrationType::class,$user);
-    $form->handleRequest($request);
-    if ($form->isSubmitted()&&$form->isValid()){
-    $hash=$encoder->encodePassword($user,$user->getPassword());
-    $user->setPassword($hash);
-    $user->setRole('ROLE_USER');
-        $manager->persist($user);
-        $manager->flush();
+        $form = $this->createForm(RegistrationType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            $user->setRole('ROLE_USER');
+            $manager->persist($user);
+            $manager->flush();
 
-        return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('security_login');
 
-    }
-    return $this->render("security/registration.html.twig",['form'=>$form->createView()]);
+        }
+        return $this->render("security/registration.html.twig", ['form' => $form->createView()]);
     }
 
     /**
-     *@Route("/connexion",name="security_login")
+     * @Route("/connexion",name="security_login")
      */
 
-public function login(){
+    public function login()
+    {
 
-    return $this->render('security/login.html.twig');
+        return $this->render('security/login.html.twig');
 
 
-}
-/**
- *@Route("/deconnexion",name="security_logout")
- */
-public function logout(){
+    }
 
-    return $this->render('site/index.html.twig');
-    return $this->redirectToRoute("site_index");
-}
-/**
- * @Route("/profil",name="security_profil")
- */
-public function profil(){
+    /**
+     * @Route("/deconnexion",name="security_logout")
+     */
+    public function logout()
+    {
 
-return $this->render('security/profil.html.twig');
+        return $this->render('site/index.html.twig');
+        return $this->redirectToRoute("site_index");
+    }
 
-}
+    /**
+     * @Route("/profil",name="security_profil")
+     */
+    public function profil()
+    {
+
+        return $this->render('security/profil.html.twig');
+
+    }
 
 }
